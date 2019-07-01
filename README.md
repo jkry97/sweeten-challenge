@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This implementation consist algorithm to find 3 relevant contractor
 
-Things you may want to cover:
+test is not implemented
 
-* Ruby version
 
-* System dependencies
+production url : https://jitendar-sweeten.herokuapp.com/
 
-* Configuration
+Instruction for installation in local system
 
-* Database creation
+`git clone https://github.com/jkry97/sweeten-challenge.git`
 
-* Database initialization
+`cd sweeten-challenge`
 
-* How to run the test suite
+`bundle install`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`rails s`
