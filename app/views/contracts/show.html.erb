@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @contract.rating %>
+</p>
+
+<p>
+  <strong>Home owner:</strong>
+  <%= @contract.home_owner.id %>
+</p>
+
+<p>
+  <strong>Contractor:</strong>
+  <%= @contract.contractor.id %>
+</p>
+
+
+<%= link_to 'Back', contracts_path %>

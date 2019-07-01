@@ -1,0 +1,76 @@
+<p id="notice"><%= notice %></p>
+
+
+<table class="table table-bordered">
+<caption> 
+    <%= link_to 'Edit', edit_home_owner_path(@home_owner), { class: 'btn btn-outline-warning'} %> 
+    <%= link_to 'Back', home_owners_path, { class: 'btn btn-outline-secondary'} %>
+</caption>
+  <thead>
+    <tr>
+      <th scope="col" >Latitude</th>
+      <th scope="col" >Longitude</th>
+      <th scope="col" >Max budget</th>
+      <th scope="col" >Build services</th>
+      <th scope="col" >Design services</th>
+    </tr>
+
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @home_owner.latitude %></td>
+        <td><%= @home_owner.longitude %></td>
+        <td><%= @home_owner.max_budget %></td>
+        <td><%= @home_owner.build_services %></td>
+        <td><%= @home_owner.design_services %></td>
+      </tr>
+
+  </tbody>
+</table>
+
+<% if @contractors.present? %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" >Latitude</th>
+      <th scope="col" >Longitude</th>
+      <th scope="col" >Min budget</th>
+      <th scope="col" >Max budget</th>
+      <th scope="col" >Rating</th>
+      <th scope="col" >Build services</th>
+      <th scope="col" >Design services</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @contractors.each do |contractor| %>
+      <tr>
+        <td><%= contractor.latitude %></td>
+        <td><%= contractor.longitude %></td>
+        <td><%= contractor.min_budget %></td>
+        <td><%= contractor.max_budget %></td>
+        <td><%= contractor.rating %></td>
+        <td><%= contractor.build_services %></td>
+        <td><%= contractor.design_services %></td>
+        <td>
+          <%= link_to 'Show', contractor, {class: 'btn btn-outline-primary d-inline-block'} %>
+          <% if @home_owner.contractor.present? %>
+            <%= link_to 'Reject', contract_path(@home_owner.contract), class: 'btn btn-outline-danger d-inline-block', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% else %>
+
+             <%= form_with(model: Contract, local: true) do |form| %>
+              <%= form.hidden_field :rating, value: 1 %>
+              <%= form.hidden_field :home_owner_id, value: @home_owner.id %>
+              <%= form.hidden_field :contractor_id, value:  contractor.id %>
+              <%= form.submit 'Accept',  class: 'btn btn-outline-success d-inline' %>
+            <% end %>        
+             <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>No Contactor found!</p>
+<% end %>

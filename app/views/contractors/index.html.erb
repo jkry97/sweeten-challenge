@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contractors</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Latitude</th>
+      <th scope="col">Longitude</th>
+      <th scope="col">Min budget</th>
+      <th scope="col">Max budget</th>
+      <th scope="col">Build services</th>
+      <th scope="col">Design services</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contractors.each do |contractor| %>
+      <tr>
+        <td><%= contractor.latitude %></td>
+        <td><%= contractor.longitude %></td>
+        <td><%= contractor.min_budget %></td>
+        <td><%= contractor.max_budget %></td>
+        <td><%= contractor.build_services %></td>
+        <td><%= contractor.design_services %></td>
+        <td><%= contractor.rating %></td>
+        <td><%= link_to 'Show', contractor, {class: 'btn btn-outline-primary'} %>
+        <%= link_to 'Edit', edit_contractor_path(contractor),{class: 'btn btn-outline-warning'} %>
+        <%= link_to 'Destroy', contractor, class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

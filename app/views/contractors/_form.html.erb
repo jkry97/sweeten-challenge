@@ -1,0 +1,59 @@
+<%= form_with(model: contractor, local: true) do |form| %>
+  <% if contractor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contractor.errors.count, "error") %> prohibited this contractor from being saved:</h2>
+
+      <ul>
+      <% contractor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row">
+    <%= form.label :latitude, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+    <%= form.text_field :latitude, { class: 'form-control'} %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :longitude, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+    <%= form.text_field :longitude, { class: 'form-control'} %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :max_budget, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+    <%= form.text_field :max_budget, { class: 'form-control'} %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= form.label :min_budget, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+    <%= form.text_field :min_budget, { class: 'form-control'} %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :build_services, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+    <%= form.check_box :build_services %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :design_services, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+    <%= form.check_box :design_services %>
+    </div>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit 'Create new Contractor',  class: 'btn btn-primary' %>
+  </div>
+<% end %>

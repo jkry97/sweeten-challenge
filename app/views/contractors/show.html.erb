@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" >Latitude</th>
+      <th scope="col" >Longitude</th>
+      <th scope="col" >Min budget</th>
+      <th scope="col" >Max budget</th>
+      <th scope="col" >Build services</th>
+      <th scope="col" >Design services</th>
+      <th scope="col">Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @contractor.latitude %></td>
+        <td><%= @contractor.longitude %></td>
+        <td><%= @contractor.min_budget %></td>
+        <td><%= @contractor.max_budget %></td>
+        <td><%= @contractor.build_services %></td>
+        <td><%= @contractor.design_services %></td>
+        <td><%= @contractor.rating %></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+<% if @contractor.contracts.includes(:home_owner) %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" >Latitude</th>
+      <th scope="col" >Longitude</th>
+      <th scope="col" >Max budget</th>
+      <th scope="col" >Build services</th>
+      <th scope="col" >Design services</th>
+      <th scope="col" >Action</th>
+
+    </tr>
+
+  </thead>
+  <tbody>
+  <% @contractor.contracts.includes(:home_owner).each do |contract| %>
+      <tr>
+        <td><%= contract.home_owner.latitude %></td>
+        <td><%= contract.home_owner.longitude %></td>
+        <td><%= contract.home_owner.max_budget %></td>
+        <td><%= contract.home_owner.build_services %></td>
+        <td><%= contract.home_owner.design_services %></td>
+        <td><%= link_to 'Reject', contract_path(contract), class: 'btn btn-outline-danger d-inline-block', method: :delete, data: { confirm: 'Are you sure! you want to reject request?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+
+<p>No renovation projects found!</p>
+
+<% end %>
+
+<%= link_to 'Edit', edit_contractor_path(@contractor), {class: 'btn btn-outline-warning px-5'} %>
+<%= link_to 'Back', contractors_path, {class: 'btn btn-outline-secondary px-5'} %>

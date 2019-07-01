@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Home Owners</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" >Latitude</th>
+      <th scope="col" >Longitude</th>
+      <th scope="col" >Min budget</th>
+      <th scope="col" >Max budget</th>
+      <th scope="col" >Build services</th>
+      <th scope="col" >Design services</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @home_owners.each do |home_owner| %>
+      <tr>
+        <td><%= home_owner.latitude %></td>
+        <td><%= home_owner.longitude %></td>
+        <td><%= home_owner.min_budget %></td>
+        <td><%= home_owner.max_budget %></td>
+        <td><%= home_owner.build_services %></td>
+        <td><%= home_owner.design_services %></td>
+        <td><%= link_to 'Show', home_owner, {class: 'btn btn-outline-primary'} %>
+            <%= link_to 'Edit', edit_home_owner_path(home_owner),{class: 'btn btn-outline-warning'} %>
+            <%= link_to 'Destroy', home_owner, class: 'btn btn-outline-danger',  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Home Owner', new_home_owner_path %>
