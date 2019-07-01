@@ -5,6 +5,7 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th scope="col">Cname</th>
       <th scope="col">Latitude</th>
       <th scope="col">Longitude</th>
       <th scope="col">Min budget</th>
@@ -19,6 +20,7 @@
   <tbody>
     <% @contractors.each do |contractor| %>
       <tr>
+        <td><%= "c_"+contractor.id.to_s %></td>
         <td><%= contractor.latitude %></td>
         <td><%= contractor.longitude %></td>
         <td><%= contractor.min_budget %></td>
@@ -26,9 +28,9 @@
         <td><%= contractor.build_services %></td>
         <td><%= contractor.design_services %></td>
         <td><%= contractor.rating %></td>
-        <td><%= link_to 'Show', contractor, {class: 'btn btn-outline-primary'} %>
-        <%= link_to 'Edit', edit_contractor_path(contractor),{class: 'btn btn-outline-warning'} %>
-        <%= link_to 'Destroy', contractor, class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', contractor, {class: 'btn btn-outline-primary m-1 st-btn'} %>
+        <%#= link_to 'Edit', edit_contractor_path(contractor),{class: 'btn btn-outline-warning'} %>
+        <%= link_to 'Destroy', contractor, class: 'btn btn-outline-danger m-1 st-btn', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -3,11 +3,12 @@
 
 <table class="table table-bordered">
 <caption> 
-    <%= link_to 'Edit', edit_home_owner_path(@home_owner), { class: 'btn btn-outline-warning'} %> 
+    <%#= link_to 'Edit', edit_home_owner_path(@home_owner), { class: 'btn btn-outline-warning'} %> 
     <%= link_to 'Back', home_owners_path, { class: 'btn btn-outline-secondary'} %>
 </caption>
   <thead>
     <tr>
+      <th scope="col" >Project</th>
       <th scope="col" >Latitude</th>
       <th scope="col" >Longitude</th>
       <th scope="col" >Max budget</th>
@@ -18,6 +19,7 @@
   </thead>
   <tbody>
       <tr>
+        <td><%= "p_"+@home_owner.id.to_s %></td>
         <td><%= @home_owner.latitude %></td>
         <td><%= @home_owner.longitude %></td>
         <td><%= @home_owner.max_budget %></td>
@@ -32,6 +34,7 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th scope="col" >cname</th>
       <th scope="col" >Latitude</th>
       <th scope="col" >Longitude</th>
       <th scope="col" >Min budget</th>
@@ -39,6 +42,7 @@
       <th scope="col" >Rating</th>
       <th scope="col" >Build services</th>
       <th scope="col" >Design services</th>
+      <th scope="col" >Distance (in km)</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -46,6 +50,7 @@
     
     <% @contractors.each do |contractor| %>
       <tr>
+        <td><%= "c_"+contractor.id.to_s %></td>
         <td><%= contractor.latitude %></td>
         <td><%= contractor.longitude %></td>
         <td><%= contractor.min_budget %></td>
@@ -53,19 +58,19 @@
         <td><%= contractor.rating %></td>
         <td><%= contractor.build_services %></td>
         <td><%= contractor.design_services %></td>
+        <td><%= @home_owner.coordinateToDistance({latitude: contractor.latitude,longitude: contractor.longitude}) %>
         <td>
-          <%= link_to 'Show', contractor, {class: 'btn btn-outline-primary d-inline-block'} %>
-          <% if @home_owner.contractor.present? %>
-            <%= link_to 'Reject', contract_path(@home_owner.contract), class: 'btn btn-outline-danger d-inline-block', method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% else %>
-
+          <%= link_to 'Show', contractor, {class: 'btn btn-outline-primary m-1 st-btn'} %>
+          <% if @home_owner.contract.present? && @home_owner.contract.contractor_id  == contractor.id %>
+            <%= link_to 'Reject', contract_path(@home_owner.contract), class: 'btn btn-outline-danger m-1 st-btn', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% elsif @home_owner.contract.nil? %>
              <%= form_with(model: Contract, local: true) do |form| %>
               <%= form.hidden_field :rating, value: 1 %>
               <%= form.hidden_field :home_owner_id, value: @home_owner.id %>
               <%= form.hidden_field :contractor_id, value:  contractor.id %>
-              <%= form.submit 'Accept',  class: 'btn btn-outline-success d-inline' %>
+              <%= form.submit 'Accept',  class: 'btn btn-outline-success m-1 st-btn' %>
             <% end %>        
-             <% end %>
+            <% end %>
         </td>
       </tr>
     <% end %>

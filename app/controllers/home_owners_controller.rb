@@ -14,7 +14,13 @@ class HomeOwnersController < ApplicationController
                              .where('max_budget <= ?', @home_owner.max_budget)
                              .where(build_services: @home_owner.build_services)
                              .where(design_services: @home_owner.design_services)
-                             .limit(3)
+                             .sort_by{ | contractor | @home_owner.coordinateToDistance({
+                               latitude: contractor.latitude,
+                               longitude: contractor.longitude
+                               }) }
+
+  @contractors = @contractors[0..2]   
+  puts "===========> contractor count: "+ @contractors.count.inspect                          
   end
 
   # GET /home_owners/new

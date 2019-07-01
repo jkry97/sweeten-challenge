@@ -11,47 +11,57 @@
     </div>
   <% end %>
 
+<div class="row">
+<div class="d-flex w-100">
+<div class="container w-50">
   <div class="form-group row">
-    <%= form.label :latitude, {class: 'col-sm-2 col-form-label'} %>
-    <div class="col-sm-10">
-    <%= form.text_field :latitude, { class: 'form-control'} %>
+    <%= form.label :latitude, {class: 'col-sm-4 col-form-label'} %>
+    <div class="col-sm-8">
+    <%= form.text_field :latitude, { class: 'form-control lat', readonly: true} %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :longitude, {class: 'col-sm-2 col-form-label'} %>
-    <div class="col-sm-10">
-    <%= form.text_field :longitude, { class: 'form-control'} %>
+    <%= form.label :longitude, {class: 'col-sm-4 col-form-label'} %>
+    <div class="col-sm-8">
+    <%= form.text_field :longitude, { class: 'form-control ln', readonly: true} %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :max_budget, {class: 'col-sm-2 col-form-label'} %>
-    <div class="col-sm-10">
-    <%= form.text_field :max_budget, { class: 'form-control'} %>
+    <%= form.label :max_budget, {class: 'col-sm-4 col-form-label'} %>
+    <div class="col-sm-8">
+    <%= form.number_field :max_budget, { class: 'form-control'} %>
     </div>
   </div>
   <div class="form-group row">
-    <%= form.label :min_budget, {class: 'col-sm-2 col-form-label'} %>
-    <div class="col-sm-10">
-    <%= form.text_field :min_budget, { class: 'form-control'} %>
+    <%= form.label :min_budget, {class: 'col-sm-4 col-form-label'} %>
+    <div class="col-sm-8">
+    <%= form.number_field :min_budget, { class: 'form-control'} %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :build_services, {class: 'col-sm-2 col-form-label'} %>
-    <div class="col-sm-10">
+    <%= form.label :build_services, {class: 'col-sm-4 col-form-label'} %>
+    <div class="col-sm-8">
     <%= form.check_box :build_services %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :design_services, {class: 'col-sm-2 col-form-label'} %>
-    <div class="col-sm-10">
+    <%= form.label :design_services, {class: 'col-sm-4 col-form-label'} %>
+    <div class="col-sm-8">
     <%= form.check_box :design_services %>
     </div>
   </div>
 
+</div>
+<div class="map-container border w-50 form-control">
+  <%= render 'layouts/map_layout' %>
+  <p class="mt-4">Select location latitude and longitude through map</p>
+</div>
+</div>
+</div>
 
   <div class="actions">
     <%= form.submit 'Create new Contractor',  class: 'btn btn-primary' %>

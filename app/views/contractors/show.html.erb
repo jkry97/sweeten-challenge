@@ -3,6 +3,7 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th scope="col" >Cname</th>
       <th scope="col" >Latitude</th>
       <th scope="col" >Longitude</th>
       <th scope="col" >Min budget</th>
@@ -14,6 +15,7 @@
   </thead>
   <tbody>
       <tr>
+        <td><%= "C_"+@contractor.id.to_s %></td>
         <td><%= @contractor.latitude %></td>
         <td><%= @contractor.longitude %></td>
         <td><%= @contractor.min_budget %></td>
@@ -27,16 +29,18 @@
 
 
 
-<% if @contractor.contracts.includes(:home_owner) %>
+<% if @contractor.contracts.present? %>
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th scope="col" >Project</th>
       <th scope="col" >Latitude</th>
       <th scope="col" >Longitude</th>
       <th scope="col" >Max budget</th>
       <th scope="col" >Build services</th>
       <th scope="col" >Design services</th>
-      <th scope="col" >Action</th>
+      <th scope="col" >Distance (in km)</th>
+      <th scope="col" >Action </th>
 
     </tr>
 
@@ -44,11 +48,13 @@
   <tbody>
   <% @contractor.contracts.includes(:home_owner).each do |contract| %>
       <tr>
+        <td><%= "p_"+contract.home_owner.id.to_s %></td>
         <td><%= contract.home_owner.latitude %></td>
         <td><%= contract.home_owner.longitude %></td>
         <td><%= contract.home_owner.max_budget %></td>
         <td><%= contract.home_owner.build_services %></td>
         <td><%= contract.home_owner.design_services %></td>
+        <td><%= contract.home_owner.coordinateToDistance({latitude: @contractor.latitude,longitude: @contractor.longitude}) %>
         <td><%= link_to 'Reject', contract_path(contract), class: 'btn btn-outline-danger d-inline-block', method: :delete, data: { confirm: 'Are you sure! you want to reject request?' } %></td>
       </tr>
   <% end %>
@@ -60,5 +66,5 @@
 
 <% end %>
 
-<%= link_to 'Edit', edit_contractor_path(@contractor), {class: 'btn btn-outline-warning px-5'} %>
+<%#= link_to 'Edit', edit_contractor_path(@contractor), {class: 'btn btn-outline-warning px-5'} %>
 <%= link_to 'Back', contractors_path, {class: 'btn btn-outline-secondary px-5'} %>

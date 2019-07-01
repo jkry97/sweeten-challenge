@@ -16,3 +16,5 @@ Instruction for installation in local system
 `bundle install`
 
 `rails s`
+
+then navigate to `http://localhost:3000/`
